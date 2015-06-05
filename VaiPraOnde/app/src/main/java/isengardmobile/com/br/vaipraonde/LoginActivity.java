@@ -1,9 +1,13 @@
 package isengardmobile.com.br.vaipraonde;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+
 import com.digits.sdk.android.Digits;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterCore;
@@ -21,6 +25,8 @@ public class LoginActivity extends ActionBarActivity {
     private static final String TWITTER_KEY = "8A7dKbL8LgrV9D2WI3O7ngwbD";
     private static final String TWITTER_SECRET = "k8F1RwMNfqsRb1gUXVAH5PA8SBgLsXwbtfRqCeOAACNaDzd0yj";
 
+    Button cadButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +41,7 @@ public class LoginActivity extends ActionBarActivity {
             @Override
             public void success(DigitsSession session,
                                 String phoneNumber) {
-                // Do something with the session
+
             }
 
             @Override
@@ -43,9 +49,14 @@ public class LoginActivity extends ActionBarActivity {
                 // Do something on failure
             }
         });
+
+        cadButton = (Button) findViewById(R.id.btn_cadastrar);
     }
 
-
+    public void cadatrar(View view){
+        Intent intent = new Intent(this, CadastroActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
