@@ -12,6 +12,7 @@ apply plugin: 'io.fabric'
 
 repositories {
     maven { url 'https://maven.fabric.io/public' }
+    mavenCentral()
 }
 
 
@@ -40,4 +41,5 @@ dependencies {
     compile('com.digits.sdk.android:digits:1.5.0@aar') {
         transitive = true;
     }
+    compile 'com.facebook.android:facebook-android-sdk:4.1.0'
 }
