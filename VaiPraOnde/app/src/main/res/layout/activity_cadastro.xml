@@ -23,4 +23,43 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:hint="@string/cad_nome" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="@string/cad_lastName"
+        android:ems="10"
+        android:id="@+id/editText2" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText5"
+        android:hint="@string/cad_city" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cad_male"
+            android:padding="20pt"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cad_female"/>
+        </LinearLayout>
+
+    <Button
+        android:layout_width="169dp"
+        android:layout_height="wrap_content"
+        android:text="@string/cad_next"
+        android:id="@+id/button"
+        android:background="@color/background_floating_material_dark" />
+
 </LinearLayout>

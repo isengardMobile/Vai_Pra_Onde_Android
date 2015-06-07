@@ -7,4 +7,10 @@
     <string name="title_activity_cadastro">CadastroActivity</string>
     <string name="cad_nome">Infome seu Nome</string>
     <string name="cad_title">Por Favor, Conclua seu Cadastro!</string>
+    <string name="cad_lastName">Infome seu Sobrenome</string>
+    <string name="cad_birthday">Infome sua data de nascimento</string>
+    <string name="cad_city">Infome sua Cidade!</string>
+    <string name="cad_male">Masculino</string>
+    <string name="cad_female">Feminino</string>
+    <string name="cad_next">Prosseguir</string>
 </resources>
