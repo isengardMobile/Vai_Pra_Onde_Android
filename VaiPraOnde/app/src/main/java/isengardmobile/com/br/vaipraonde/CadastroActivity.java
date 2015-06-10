@@ -6,8 +6,8 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,36 +22,38 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
-
-public class CadastroActivity extends Activity {
-    CallbackManager callbackManager;
-    View view;
-    private LoginButton loginButton;
-
+public class CadastroActivity extends ActionBarActivity {
+    protected static CallbackManager callbackManager;
+    protected static View rootView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(this.getApplicationContext());
+        setContentView(R.layout.activity_cadastro);
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.container, new CadastroFragment())
+                    .commit();
+        }
 
+        FacebookSdk.sdkInitialize(getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
+        LoginButton loginButton = (LoginButton) rootView.findViewById(R.id.login_button);
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                
+            }
 
-        LoginManager.getInstance().registerCallback(callbackManager,
-                new FacebookCallback<LoginResult>() {
-                    @Override
-                    public void onSuccess(LoginResult loginResult) {
-                        // App code
-                    }
+            @Override
+            public void onCancel() {
 
-                    @Override
-                    public void onCancel() {
-                        // App code
-                    }
+            }
 
-                    @Override
-                    public void onError(FacebookException exception) {
-                        // App code
-                    }
-                });
+            @Override
+            public void onError(FacebookException e) {
+
+            }
+        });
     }
 
 
@@ -81,5 +83,48 @@ public class CadastroActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * A placeholder fragment containing a simple view.
+     */
+    public static class CadastroFragment extends Fragment {
+
+        private LoginButton loginButton;
+
+        public CadastroFragment() {
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            rootView = inflater.inflate(R.layout.fragment_cadastro, container, false);
+
+            loginButton = (LoginButton) rootView.findViewById(R.id.login_button);
+            loginButton.setReadPermissions("user_friends");
+            // If using in a fragment
+            loginButton.setFragment(this);
+            // Other app specific specialization
+
+            // Callback registration
+            loginButton.registerCallback(CadastroActivity.callbackManager, new FacebookCallback<LoginResult>() {
+                @Override
+                public void onSuccess(LoginResult loginResult) {
+                    // App code
+                }
+
+                @Override
+                public void onCancel() {
+                    // App code
+                }
+
+                @Override
+                public void onError(FacebookException exception) {
+                    // App code
+                }
+            });
+
+            return rootView;
+        }
     }
 }
