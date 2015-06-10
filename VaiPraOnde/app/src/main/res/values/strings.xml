@@ -14,4 +14,10 @@
     <string name="cad_female">Feminino</string>
     <string name="cad_next">Prosseguir</string>
     <string name="facebook_app_id">361948737341338</string>
+    <string name="cad_name">Nome</string>
+    <string name="cad_lastname">Sobrenome</string>
+    <string name="cad_email">Email</string>
+    <string name="cad_password">Senha</string>
+    <string name="cad_pass_confirm">Confirmação de Senha</string>
+    <string name="login_title">Vai Pra Onde?</string>
 </resources>
