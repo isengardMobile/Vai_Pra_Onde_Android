@@ -14,20 +14,39 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class CadastroActivity extends ActionBarActivity {
+
+public class ProfileActivity extends ActionBarActivity {
+
+    private ImageView profileImage;
+    private Profile profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastro);
+        setContentView(R.layout.activity_profile);
 
+        profileImage = (ImageView) findViewById(R.id.profileImage);
+
+        Bundle params = getIntent().getExtras();
+        profile = (Profile) params.get("profile");
+
+        try {
+            URL imageURL = new URL("https://graph.facebook.com/" + profile.getId() + "/picture?type=large");
+            Bitmap bitmap = BitmapFactory.decodeStream(imageURL.openConnection().getInputStream());
+
+            profileImage.setImageBitmap(bitmap);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_cadastro, menu);
+        getMenuInflater().inflate(R.menu.menu_profile, menu);
         return true;
     }
 

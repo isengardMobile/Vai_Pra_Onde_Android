@@ -20,4 +20,5 @@
     <string name="cad_password">Senha</string>
     <string name="cad_pass_confirm">Confirmação de Senha</string>
     <string name="login_title">Vai Pra Onde?</string>
+    <string name="title_activity_profile">ProfileActivity</string>
 </resources>

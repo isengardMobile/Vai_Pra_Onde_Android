@@ -15,6 +15,8 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.Profile;
+import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -36,9 +38,11 @@ public class LoginActivity extends ActionBarActivity {
     private static final String TWITTER_KEY = "8A7dKbL8LgrV9D2WI3O7ngwbD";
     private static final String TWITTER_SECRET = "k8F1RwMNfqsRb1gUXVAH5PA8SBgLsXwbtfRqCeOAACNaDzd0yj";
 
-    Button cadButton;
-    LoginButton loginButton;
-    CallbackManager callbackManager;
+    private Button cadButton;
+    private LoginButton loginButton;
+    private CallbackManager callbackManager;
+    private ProfileTracker profileTracker;
+    private Profile profile;
 
 
     @Override
@@ -68,7 +72,6 @@ public class LoginActivity extends ActionBarActivity {
                                 LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("public_profile", "user_friends"));
                                 Log.e("-->", Arrays.asList("public_profile", "user_friends").toString());
                                 Toast.makeText(getApplication(), "success", Toast.LENGTH_SHORT).show();
-
 
                             }
 
@@ -107,8 +110,17 @@ public class LoginActivity extends ActionBarActivity {
             }
         });
 
+        profileTracker = new ProfileTracker() {
+            @Override
+            protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
+                profile = currentProfile;
 
-        //FACEBOOK
+                Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+                intent.putExtra("profile", profile);
+                startActivity(intent);
+
+            }
+        };
 
 
         cadButton = (Button) findViewById(R.id.btn_cadastrar);
