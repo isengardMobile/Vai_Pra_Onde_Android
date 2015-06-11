@@ -1,45 +1,22 @@
 package isengardmobile.com.br.vaipraonde;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.content.Intent;
+
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
 
-import com.facebook.Profile;
-
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-
+import com.facebook.FacebookSdk;
 
 public class ProfileActivity extends ActionBarActivity {
-
-    private ImageView profileImage;
-    private Profile profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(this.getApplicationContext());
+
         setContentView(R.layout.activity_profile);
-
-        profileImage = (ImageView) findViewById(R.id.profileImage);
-
-        Bundle params = getIntent().getExtras();
-        profile = (Profile) params.get("profile");
-
-        try {
-            URL imageURL = new URL("https://graph.facebook.com/" + profile.getId() + "/picture?type=large");
-            Bitmap bitmap = BitmapFactory.decodeStream(imageURL.openConnection().getInputStream());
-
-            profileImage.setImageBitmap(bitmap);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 
@@ -63,5 +40,11 @@ public class ProfileActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
     }
 }

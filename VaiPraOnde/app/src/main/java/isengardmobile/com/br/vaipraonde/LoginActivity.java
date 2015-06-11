@@ -90,6 +90,25 @@ public class LoginActivity extends ActionBarActivity {
             }
         });
 
+        profileTracker = new ProfileTracker() {
+            @Override
+            protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
+                profile = currentProfile;
+
+//                Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+//                intent.putExtra("profile", profile);
+//                startActivity(intent);
+
+            }
+        };
+
+        profileTracker.startTracking();
+
+        if(profileTracker.isTracking()){
+            Intent intent = new Intent(this, ProfileActivity.class);
+            startActivity(intent);
+        }
+
         //DIGITS
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         Fabric.with(this, new TwitterCore(authConfig), new Digits());
@@ -109,19 +128,6 @@ public class LoginActivity extends ActionBarActivity {
                 // Do something on failure
             }
         });
-
-        profileTracker = new ProfileTracker() {
-            @Override
-            protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
-                profile = currentProfile;
-
-                Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
-                intent.putExtra("profile", profile);
-                startActivity(intent);
-
-            }
-        };
-
 
         cadButton = (Button) findViewById(R.id.btn_cadastrar);
     }
@@ -157,5 +163,11 @@ public class LoginActivity extends ActionBarActivity {
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        profileTracker.stopTracking();
     }
 }
