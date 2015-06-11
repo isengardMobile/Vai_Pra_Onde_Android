@@ -5,10 +5,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.facebook.login.widget.LoginButton;
-
-import java.util.Arrays;
-
 
 public class CadastroActivity extends ActionBarActivity {
 
@@ -16,9 +12,6 @@ public class CadastroActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
-
-        LoginButton lb = (LoginButton) findViewById(R.id.login_button);
-        lb.setPublishPermissions(Arrays.asList("email", "public_profile", "user_friends"));
     }
 
 

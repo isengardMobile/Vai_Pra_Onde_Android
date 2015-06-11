@@ -3,12 +3,21 @@ package isengardmobile.com.br.vaipraonde;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.digits.sdk.android.Digits;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterCore;
 import io.fabric.sdk.android.Fabric;
@@ -18,6 +27,8 @@ import com.digits.sdk.android.DigitsAuthButton;
 import com.digits.sdk.android.DigitsException;
 import com.digits.sdk.android.DigitsSession;
 
+import java.util.Arrays;
+
 
 public class LoginActivity extends ActionBarActivity {
 
@@ -26,11 +37,57 @@ public class LoginActivity extends ActionBarActivity {
     private static final String TWITTER_SECRET = "k8F1RwMNfqsRb1gUXVAH5PA8SBgLsXwbtfRqCeOAACNaDzd0yj";
 
     Button cadButton;
+    LoginButton loginButton;
+    CallbackManager callbackManager;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        FacebookSdk.sdkInitialize(this.getApplicationContext());
+        callbackManager = CallbackManager.Factory.create();
+
+        setContentView(R.layout.activity_login);
+
+        loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton.setReadPermissions("email", "user_likes", "user_friends");
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //callback registration
+
+                LoginManager.getInstance().registerCallback(callbackManager,
+                        new FacebookCallback<LoginResult>() {
+                            @Override
+                            public void onSuccess(LoginResult loginResult) {
+                                // App code
+
+                                LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("public_profile", "user_friends"));
+                                Log.e("-->", Arrays.asList("public_profile", "user_friends").toString());
+                                Toast.makeText(getApplication(), "success", Toast.LENGTH_SHORT).show();
+
+
+                            }
+
+                            @Override
+                            public void onCancel() {
+                                // App code
+                                Toast.makeText(getApplication(), "fail", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onError(FacebookException exception) {
+                                // App code
+                                Toast.makeText(getApplication(), "error", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+        });
+
+        //DIGITS
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         Fabric.with(this, new TwitterCore(authConfig), new Digits());
         setContentView(R.layout.activity_login);
@@ -49,6 +106,10 @@ public class LoginActivity extends ActionBarActivity {
                 // Do something on failure
             }
         });
+
+
+        //FACEBOOK
+
 
         cadButton = (Button) findViewById(R.id.btn_cadastrar);
     }
@@ -78,5 +139,11 @@ public class LoginActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 }
