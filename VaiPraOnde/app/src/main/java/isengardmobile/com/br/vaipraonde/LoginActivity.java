@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.digits.sdk.android.Digits;
+import com.facebook.AccessToken;
+import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -43,6 +45,8 @@ public class LoginActivity extends ActionBarActivity {
     private CallbackManager callbackManager;
     private ProfileTracker profileTracker;
     private Profile profile;
+    private AccessTokenTracker accessTokenTracker;
+    private AccessToken accessToken;
 
 
     @Override
@@ -73,6 +77,14 @@ public class LoginActivity extends ActionBarActivity {
                                 Log.e("-->", Arrays.asList("public_profile", "user_friends").toString());
                                 Toast.makeText(getApplication(), "success", Toast.LENGTH_SHORT).show();
 
+                                profileTracker = new ProfileTracker() {
+                                    @Override
+                                    protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
+                                        profile = currentProfile;
+
+                                    }
+                                };
+
                             }
 
                             @Override
@@ -90,21 +102,19 @@ public class LoginActivity extends ActionBarActivity {
             }
         });
 
-        profileTracker = new ProfileTracker() {
+        accessTokenTracker = new AccessTokenTracker() {
             @Override
-            protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
-                profile = currentProfile;
+            protected void onCurrentAccessTokenChanged(
+                    AccessToken oldAccessToken,
+                    AccessToken currentAccessToken) {
 
-//                Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
-//                intent.putExtra("profile", profile);
-//                startActivity(intent);
-
+                accessToken = currentAccessToken;
+                // App code
             }
         };
 
-        profileTracker.startTracking();
 
-        if(profileTracker.isTracking()){
+        if(accessTokenTracker.isTracking()){
             Intent intent = new Intent(this, ProfileActivity.class);
             startActivity(intent);
         }
@@ -120,6 +130,9 @@ public class LoginActivity extends ActionBarActivity {
             @Override
             public void success(DigitsSession session,
                                 String phoneNumber) {
+
+                Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+                startActivity(intent);
 
             }
 

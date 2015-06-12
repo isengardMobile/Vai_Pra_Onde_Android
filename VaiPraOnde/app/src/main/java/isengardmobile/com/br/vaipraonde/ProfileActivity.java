@@ -1,22 +1,41 @@
 package isengardmobile.com.br.vaipraonde;
 
+
+import android.app.AlertDialog;
 import android.content.Intent;
 
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.Toast;
 
-import com.facebook.FacebookSdk;
+import com.facebook.AccessToken;
+import com.facebook.Profile;
+
 
 public class ProfileActivity extends ActionBarActivity {
 
+
+    private Profile profile;
+    private ImageView profileImage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(this.getApplicationContext());
-
         setContentView(R.layout.activity_profile);
+
+        profileImage = (ImageView) findViewById(R.id.profileImage);
+        profile = Profile.getCurrentProfile();
+
+        Toast.makeText(this, profile.getProfilePictureUri(100, 100).toString(), Toast.LENGTH_SHORT).show();
+        profileImage.setImageURI(profile.getProfilePictureUri(100, 100));
+
+
+
+
+
     }
 
 
@@ -47,4 +66,13 @@ public class ProfileActivity extends ActionBarActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
     }
+
+//    private class BuscaFotoPerfil extends AsyncTask<Integer, Void, String>{
+//
+//        @Override
+//        protected String doInBackground(Integer... params) {
+//
+//            return null;
+//        }
+//    }
 }
