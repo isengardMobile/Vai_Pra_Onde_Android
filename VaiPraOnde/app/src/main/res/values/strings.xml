@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">VaiPraOnde</string>
+    <string name="app_name">Vai Pra Onde</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -21,4 +21,7 @@
     <string name="cad_pass_confirm">Confirmação de Senha</string>
     <string name="login_title">Vai Pra Onde?</string>
     <string name="title_activity_profile">ProfileActivity</string>
+    <string name="cadEventButton">Cadastrar Evento</string>
+    <string name="myEvents">Meus Eventos</string>
+    <string name="inviteFriends">Convidar Amigos</string>
 </resources>

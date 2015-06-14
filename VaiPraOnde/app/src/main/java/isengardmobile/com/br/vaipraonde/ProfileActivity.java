@@ -4,36 +4,48 @@ package isengardmobile.com.br.vaipraonde;
 import android.app.AlertDialog;
 import android.content.Intent;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.Profile;
+import com.facebook.login.widget.ProfilePictureView;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 
 public class ProfileActivity extends ActionBarActivity {
 
 
     private Profile profile;
-    private ImageView profileImage;
+    private ProfilePictureView profileImage;
+    private TextView profileName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        profileImage = (ImageView) findViewById(R.id.profileImage);
         profile = Profile.getCurrentProfile();
 
-        Toast.makeText(this, profile.getProfilePictureUri(100, 100).toString(), Toast.LENGTH_SHORT).show();
-        profileImage.setImageURI(profile.getProfilePictureUri(100, 100));
+        profileName = (TextView) findViewById(R.id.profileName);
+        profileName.setText(profile.getName());
 
-
-
+        profileImage = (ProfilePictureView) findViewById(R.id.profilePicture);
+        profileImage.setProfileId(profile.getId());
 
 
     }
@@ -67,12 +79,4 @@ public class ProfileActivity extends ActionBarActivity {
 
     }
 
-//    private class BuscaFotoPerfil extends AsyncTask<Integer, Void, String>{
-//
-//        @Override
-//        protected String doInBackground(Integer... params) {
-//
-//            return null;
-//        }
-//    }
 }
