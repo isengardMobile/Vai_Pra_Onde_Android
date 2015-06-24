@@ -17,8 +17,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.facebook.login.widget.ProfilePictureView;
+import com.parse.ParseObject;
+
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -41,13 +46,18 @@ public class ProfileActivity extends ActionBarActivity {
 
         profile = Profile.getCurrentProfile();
 
+        Log.e("link", profile.getProfilePictureUri(64,64).toString());
+
+        ParseObject user = new ParseObject("User");
+        user.put("nome", profile.getFirstName());
+        user.put("sobrenome", profile.getLastName());
+
+
         profileName = (TextView) findViewById(R.id.profileName);
         profileName.setText(profile.getName());
 
         profileImage = (ProfilePictureView) findViewById(R.id.profilePicture);
         profileImage.setProfileId(profile.getId());
-
-
     }
 
 
@@ -66,7 +76,7 @@ public class ProfileActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_eventos) {
             return true;
         }
 

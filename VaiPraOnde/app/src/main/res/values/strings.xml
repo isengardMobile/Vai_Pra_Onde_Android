@@ -24,4 +24,7 @@
     <string name="cadEventButton">Cadastrar Evento</string>
     <string name="myEvents">Meus Eventos</string>
     <string name="inviteFriends">Convidar Amigos</string>
+    <string name="action_eventos">Criar Eventos</string>
+    <string name="action_friends">Convidar Amigos</string>
+    <string name="title_events">Meus Eventos</string>
 </resources>

@@ -17,11 +17,15 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
 import com.facebook.Profile;
 import com.facebook.ProfileTracker;
+import com.facebook.internal.GraphUtil;
+import com.facebook.login.LoginFragment;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.parse.Parse;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterCore;
 import io.fabric.sdk.android.Fabric;
@@ -73,9 +77,10 @@ public class LoginActivity extends ActionBarActivity {
                             public void onSuccess(LoginResult loginResult) {
                                 // App code
 
-                                LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("public_profile", "user_friends"));
+                                LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("public_profile", "user_friends", "email"));
                                 Log.e("-->", Arrays.asList("public_profile", "user_friends").toString());
                                 Toast.makeText(getApplication(), "success", Toast.LENGTH_SHORT).show();
+
 
                                 profileTracker = new ProfileTracker() {
                                     @Override
@@ -141,6 +146,11 @@ public class LoginActivity extends ActionBarActivity {
                 // Do something on failure
             }
         });
+
+        // Enable Local Datastore.
+        Parse.enableLocalDatastore(this);
+
+        Parse.initialize(this, "I8SB9GFf3Ifjh7ftkJmxwH1RQicwQRdJygamgfE7", "aIPIxZnL14ccioidvxqmmV5AOiT75HiI5kG2k3rU");
 
         cadButton = (Button) findViewById(R.id.btn_cadastrar);
     }
