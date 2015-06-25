@@ -120,7 +120,7 @@ public class LoginActivity extends ActionBarActivity {
 
 
         if(accessTokenTracker.isTracking()){
-            Intent intent = new Intent(this, ProfileActivity.class);
+            Intent intent = new Intent(this, CadastroActivity.class);
             startActivity(intent);
         }
 
@@ -136,7 +136,7 @@ public class LoginActivity extends ActionBarActivity {
             public void success(DigitsSession session,
                                 String phoneNumber) {
 
-                Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+                Intent intent = new Intent(LoginActivity.this, CadastroActivity.class);
                 startActivity(intent);
 
             }

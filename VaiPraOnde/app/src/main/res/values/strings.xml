@@ -27,4 +27,6 @@
     <string name="action_eventos">Criar Eventos</string>
     <string name="action_friends">Convidar Amigos</string>
     <string name="title_events">Meus Eventos</string>
+    <string name="confirmEmail">Confirmação de Email</string>
+    <string name="cad_phone">Celular</string>
 </resources>
