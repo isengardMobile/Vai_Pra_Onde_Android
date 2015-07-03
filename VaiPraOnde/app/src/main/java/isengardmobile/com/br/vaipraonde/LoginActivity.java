@@ -18,6 +18,7 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.internal.GraphUtil;
@@ -34,6 +35,9 @@ import com.digits.sdk.android.AuthCallback;
 import com.digits.sdk.android.DigitsAuthButton;
 import com.digits.sdk.android.DigitsException;
 import com.digits.sdk.android.DigitsSession;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Arrays;
 
@@ -90,6 +94,7 @@ public class LoginActivity extends ActionBarActivity {
                                     }
                                 };
 
+
                             }
 
                             @Override
@@ -117,12 +122,6 @@ public class LoginActivity extends ActionBarActivity {
                 // App code
             }
         };
-
-
-        if(accessTokenTracker.isTracking()){
-            Intent intent = new Intent(this, CadastroActivity.class);
-            startActivity(intent);
-        }
 
         //DIGITS
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
@@ -153,6 +152,13 @@ public class LoginActivity extends ActionBarActivity {
         Parse.initialize(this, "I8SB9GFf3Ifjh7ftkJmxwH1RQicwQRdJygamgfE7", "aIPIxZnL14ccioidvxqmmV5AOiT75HiI5kG2k3rU");
 
         cadButton = (Button) findViewById(R.id.btn_cadastrar);
+
+        accessTokenTracker.startTracking();
+
+        if(accessTokenTracker.isTracking()){
+            Intent intent = new Intent(this, CadastroActivity.class);
+            startActivity(intent);
+        }
     }
 
     public void cadatrar(View view){
@@ -191,6 +197,5 @@ public class LoginActivity extends ActionBarActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        profileTracker.stopTracking();
     }
 }
