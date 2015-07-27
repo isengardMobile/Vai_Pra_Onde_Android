@@ -56,11 +56,9 @@ public class LoginActivity extends ActionBarActivity {
     private AccessTokenTracker accessTokenTracker;
     private AccessToken accessToken;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
 
@@ -81,9 +79,11 @@ public class LoginActivity extends ActionBarActivity {
                             public void onSuccess(LoginResult loginResult) {
                                 // App code
 
-                                LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("public_profile", "user_friends", "email"));
-                                Log.e("-->", Arrays.asList("public_profile", "user_friends").toString());
+                                LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("user_friends", "email"));
+                                Log.e("-->", Arrays.asList("user_friends").toString());
                                 Toast.makeText(getApplication(), "success", Toast.LENGTH_SHORT).show();
+
+                                accessTokenTracker.startTracking();
 
 
                                 profileTracker = new ProfileTracker() {
@@ -146,11 +146,6 @@ public class LoginActivity extends ActionBarActivity {
             }
         });
 
-        // Enable Local Datastore.
-        Parse.enableLocalDatastore(this);
-
-        Parse.initialize(this, "I8SB9GFf3Ifjh7ftkJmxwH1RQicwQRdJygamgfE7", "aIPIxZnL14ccioidvxqmmV5AOiT75HiI5kG2k3rU");
-
         cadButton = (Button) findViewById(R.id.btn_cadastrar);
 
         accessTokenTracker.startTracking();
@@ -159,6 +154,7 @@ public class LoginActivity extends ActionBarActivity {
             Intent intent = new Intent(this, CadastroActivity.class);
             startActivity(intent);
         }
+
     }
 
     public void cadatrar(View view){

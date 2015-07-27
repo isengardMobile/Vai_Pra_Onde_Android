@@ -7,118 +7,131 @@
     android:orientation="vertical"
     tools:context="isengardmobile.com.br.vaipraonde.CadastroActivity.CadastroFragment">
 
- <ImageView
-     android:layout_width="100dp"
-     android:layout_height="100dp"
-     android:id="@+id/cad_photo"
-     android:src="@drawable/com_facebook_profile_picture_blank_portrait"
-     android:layout_gravity="center_horizontal"
-     android:onClick="searchFoto"
-     android:layout_marginBottom="25dp"/>
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="400dp">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/cad_name"
-        android:hint="@string/cad_name" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/cad_lastname"
-        android:hint="@string/cad_lastname" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:id="@+id/cad_email"
-        android:hint="@string/cad_email" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:hint="@string/confirmEmail"
-        android:id="@+id/cad_confirmEmail" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="phone"
-            android:ems="11"
-            android:hint="@string/cad_phone"/>
+            android:orientation="vertical">
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="date"
-            android:ems="8"
-            android:hint="Data de Nasimento"/>
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/cad_photo"
+                android:src="@drawable/com_facebook_profile_picture_blank_portrait"
+                android:layout_gravity="center_horizontal"
+                android:onClick="searchFoto"
+                android:layout_marginBottom="25dp"/>
 
-        </LinearLayout>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/cad_name"
+                android:hint="@string/cad_name" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/cad_lastname"
+                android:hint="@string/cad_lastname" />
 
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_gravity="center_horizontal"
-            android:padding="15dp"
-            android:id="@+id/sexGroup">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:id="@+id/cad_email"
+                android:hint="@string/cad_email" />
 
-            <RadioButton
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:ems="10"
+                android:hint="@string/confirmEmail"
+                android:id="@+id/cad_confirmEmail" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:ems="11"
+                    android:hint="@string/cad_phone"/>
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="date"
+                    android:ems="8"
+                    android:hint="Data de Nasimento"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:padding="15dp"
+                    android:id="@+id/sexGroup">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cad_male"
+                        android:layout_marginRight="50dp"/>
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cad_female"
+                        android:layout_marginRight="50dp"/>
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/cad_male"
-                android:layout_marginRight="50dp"/>
+                android:orientation="horizontal"
+                android:layout_marginBottom="40dp">
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/cad_female"
-                android:layout_marginRight="50dp"/>
-            </RadioGroup>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:ems="7"
+                    android:id="@+id/cad_password"
+                    android:hint="@string/cad_password" />
 
-    </LinearLayout>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:ems="10"
+                    android:id="@+id/cad_pass_confirm"
+                    android:hint="@string/cad_pass_confirm" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:ems="7"
-            android:id="@+id/cad_password"
-            android:hint="@string/cad_password" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:ems="10"
-            android:id="@+id/cad_pass_confirm"
-            android:hint="@string/cad_pass_confirm" />
-
+            </LinearLayout>
         </LinearLayout>
+
+    </ScrollView>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cad_button"
         android:layout_gravity="center"
-        android:layout_marginTop="40dp"/>
+        android:layout_marginTop="30dp"/>
 
 </LinearLayout>

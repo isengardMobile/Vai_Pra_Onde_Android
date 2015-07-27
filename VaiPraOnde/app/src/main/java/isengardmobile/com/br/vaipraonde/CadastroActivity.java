@@ -1,31 +1,23 @@
 package isengardmobile.com.br.vaipraonde;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.Profile;
-import com.facebook.ProfileTracker;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.sql.Date;
 
 import isengardmobile.com.br.vaipraonde.model.User;
 
@@ -41,7 +33,6 @@ public class CadastroActivity extends ActionBarActivity {
     private EditText city;
     private EditText cell;
     private EditText username;
-    private AccessToken token = AccessToken.getCurrentAccessToken();
     private AccessTokenTracker accessTokenTracker;
 
     @Override
@@ -50,6 +41,7 @@ public class CadastroActivity extends ActionBarActivity {
         setContentView(R.layout.activity_cadastro);
 
         name = (EditText) findViewById(R.id.cad_name);
+        email = (EditText) findViewById(R.id.cad_email);
 
         accessTokenTracker = new AccessTokenTracker() {
             @Override
@@ -58,39 +50,40 @@ public class CadastroActivity extends ActionBarActivity {
             }
         };
 
-        user = new User();
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+
         accessTokenTracker.startTracking();
+        user = new User();
 
         if(accessTokenTracker.isTracking()){
             GraphRequest request = GraphRequest.newMeRequest(
-                    AccessToken.getCurrentAccessToken(),
+                    accessToken,
                     new GraphRequest.GraphJSONObjectCallback() {
                         @Override
                         public void onCompleted(
                                 JSONObject object,
                                 GraphResponse response) {
-                            // Application code
-                            Log.i("LoginActivity", response.toString());
-                            try {
-                                Log.i("zimei", object.toString());
-                                name.setText(object.getString("name"));
-//                                lastName.setText(object.getString("last_name"));
 
+                            Log.e("zimei", object.toString());
+                            try {
+                                user.setName(object.getString("name"));
+                                user.setSex(object.getString("gender"));
+                                user.setEmail(object.getString("email"));
+
+                                name.setText(user.getName());
+                                email.setText(user.getEmail());
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
+                            // Application code
                         }
                     });
+
             Bundle parameters = new Bundle();
-            parameters.putString("fields", "id,name,email,gender, birthday");
+            parameters.putString("fields", "id,name,link,email,gender");
             request.setParameters(parameters);
             request.executeAsync();
-
         }
-
-
-
-
 
     }
 
