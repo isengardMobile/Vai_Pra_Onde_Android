@@ -19,6 +19,7 @@ import org.json.JSONObject;
 
 import java.sql.Date;
 
+import isengardmobile.com.br.vaipraonde.isengardmobile.com.vaipraonde.views.CircleImageView;
 import isengardmobile.com.br.vaipraonde.model.User;
 
 public class CadastroActivity extends ActionBarActivity {
@@ -34,6 +35,7 @@ public class CadastroActivity extends ActionBarActivity {
     private EditText cell;
     private EditText username;
     private AccessTokenTracker accessTokenTracker;
+    private CircleImageView cadPhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,8 @@ public class CadastroActivity extends ActionBarActivity {
 
         name = (EditText) findViewById(R.id.cad_name);
         email = (EditText) findViewById(R.id.cad_email);
+        lastName = (EditText) findViewById(R.id.cad_last_name);
+        cadPhoto = (CircleImageView) findViewById(R.id.cad_photo);
 
         accessTokenTracker = new AccessTokenTracker() {
             @Override
@@ -66,12 +70,16 @@ public class CadastroActivity extends ActionBarActivity {
 
                             Log.e("zimei", object.toString());
                             try {
-                                user.setName(object.getString("name"));
+                                String[] names = object.getString("name").split(" ");
+                                user.setName(names[0]);
+                                user.setLastName(names[names.length-1]);
                                 user.setSex(object.getString("gender"));
                                 user.setEmail(object.getString("email"));
 
                                 name.setText(user.getName());
+                                lastName.setText(user.getLastName());
                                 email.setText(user.getEmail());
+
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }

@@ -17,7 +17,8 @@
                 android:layout_width="100dp"
                 android:layout_height="120dp"
                 android:layout_gravity="center"
-                android:src="@drawable/com_facebook_profile_picture_blank_square" />
+                android:src="@drawable/com_facebook_profile_picture_blank_square"
+                android:id="@+id/cad_photo"/>
 
             <EditText
                 android:layout_width="match_parent"
@@ -46,6 +47,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/cad_button"
-        android:background="@color/abc_search_url_text"/>
+        />
 
 </LinearLayout>
