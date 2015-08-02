@@ -38,6 +38,47 @@
                 android:hint="@string/cad_email"
                 android:id="@+id/cad_email"/>
 
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/cad_conf_email"
+                android:id="@+id/cad_conf_email"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/cad_password"
+                android:id="@+id/cad_password"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/cad_pass_confirm"
+                android:id="@+id/cad_pass_confirm"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/cad_phone"
+                android:id="@+id/cad_phone" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cad_male"/>
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cad_female"/>
+
+            </RadioGroup>
+
         </LinearLayout>
 
     </ScrollView>

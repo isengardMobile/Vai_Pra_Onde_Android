@@ -18,7 +18,7 @@
     <string name="cad_lastname">Sobrenome</string>
     <string name="cad_email">Email</string>
     <string name="cad_password">Senha</string>
-    <string name="cad_pass_confirm">Confirmação de Senha</string>
+    <string name="cad_pass_confirm">Confirmar Senha</string>
     <string name="login_title">Vai Pra Onde?</string>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="cadEventButton">Cadastrar Evento</string>
@@ -30,4 +30,5 @@
     <string name="confirmEmail">Confirmação de Email</string>
     <string name="cad_phone">Celular</string>
     <string name="cad_button">Cadastrar</string>
+    <string name="cad_conf_email">Confirmar Email</string>
 </resources>
