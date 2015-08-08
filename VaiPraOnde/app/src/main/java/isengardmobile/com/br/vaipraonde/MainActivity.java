@@ -22,33 +22,14 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        FacebookSdk.sdkInitialize(this.getApplicationContext());
         setContentView(R.layout.activity_main);
-
-        AccessToken accessToken = AccessToken.getCurrentAccessToken();
-
-        accessTokenTracker = new AccessTokenTracker() {
-            @Override
-            protected void onCurrentAccessTokenChanged(AccessToken accessToken, AccessToken accessToken1) {
-
-            }
-
-
-        };
 
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
 
             public void run() {
                 Intent intent;
-                if (accessTokenTracker.isTracking()){
-
-                    intent = new Intent(MainActivity.this, CadastroActivity.class);
-                }
-                else{
-                    intent = new Intent(MainActivity.this, LoginActivity.class);
-                }
-
+                intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
 
 

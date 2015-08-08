@@ -1,28 +1,41 @@
 package isengardmobile.com.br.vaipraonde;
 
+import android.app.Activity;
+import android.net.NetworkInfo;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.parse.Parse;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
+import isengardmobile.com.br.vaipraonde.api.StatesRepositoryApi;
+import isengardmobile.com.br.vaipraonde.impl.StasteRepositoryApiImpl;
 import isengardmobile.com.br.vaipraonde.isengardmobile.com.vaipraonde.views.CircleImageView;
+import isengardmobile.com.br.vaipraonde.model.States;
 import isengardmobile.com.br.vaipraonde.model.User;
 
-public class CadastroActivity extends ActionBarActivity {
+public class CadastroActivity extends Activity {
 
     private User user;
     private EditText name;
@@ -36,6 +49,9 @@ public class CadastroActivity extends ActionBarActivity {
     private EditText username;
     private AccessTokenTracker accessTokenTracker;
     private CircleImageView cadPhoto;
+    private Spinner states;
+
+    private StatesRepositoryApi statesRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,55 +63,15 @@ public class CadastroActivity extends ActionBarActivity {
         lastName = (EditText) findViewById(R.id.cad_last_name);
         cadPhoto = (CircleImageView) findViewById(R.id.cad_photo);
 
-        accessTokenTracker = new AccessTokenTracker() {
-            @Override
-            protected void onCurrentAccessTokenChanged(AccessToken accessToken, AccessToken accessToken2) {
+        states = (Spinner) findViewById(R.id.cad_states);
 
-            }
-        };
+        statesRepository = new StasteRepositoryApiImpl();
 
-        AccessToken accessToken = AccessToken.getCurrentAccessToken();
-
-        accessTokenTracker.startTracking();
-        user = new User();
-
-        if(accessTokenTracker.isTracking()){
-            GraphRequest request = GraphRequest.newMeRequest(
-                    accessToken,
-                    new GraphRequest.GraphJSONObjectCallback() {
-                        @Override
-                        public void onCompleted(
-                                JSONObject object,
-                                GraphResponse response) {
-
-                            Log.e("zimei", object.toString());
-                            try {
-                                String[] names = object.getString("name").split(" ");
-                                user.setName(names[0]);
-                                user.setLastName(names[names.length-1]);
-                                user.setSex(object.getString("gender"));
-                                user.setEmail(object.getString("email"));
-
-                                name.setText(user.getName());
-                                lastName.setText(user.getLastName());
-                                email.setText(user.getEmail());
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            // Application code
-                        }
-                    });
-
-            Bundle parameters = new Bundle();
-            parameters.putString("fields", "id,name,link,email,gender");
-            request.setParameters(parameters);
-            request.executeAsync();
-        }
+        ArrayAdapter<States> adapter = new ArrayAdapter<States>(this, android.R.layout.simple_spinner_item, statesRepository.findAll());
+        states.setAdapter(adapter);
 
     }
-
-
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

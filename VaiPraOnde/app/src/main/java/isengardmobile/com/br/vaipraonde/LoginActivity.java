@@ -59,68 +59,8 @@ public class LoginActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        callbackManager = CallbackManager.Factory.create();
 
         setContentView(R.layout.activity_login);
-
-        loginButton = (LoginButton) findViewById(R.id.login_button);
-        loginButton.setReadPermissions("email", "user_likes", "user_friends");
-
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                //callback registration
-
-                LoginManager.getInstance().registerCallback(callbackManager,
-                        new FacebookCallback<LoginResult>() {
-                            @Override
-                            public void onSuccess(LoginResult loginResult) {
-                                // App code
-
-                                LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("user_friends", "email"));
-                                Log.e("-->", Arrays.asList("user_friends").toString());
-                                Toast.makeText(getApplication(), "success", Toast.LENGTH_SHORT).show();
-
-                                accessTokenTracker.startTracking();
-
-
-                                profileTracker = new ProfileTracker() {
-                                    @Override
-                                    protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
-                                        profile = currentProfile;
-
-                                    }
-                                };
-
-
-                            }
-
-                            @Override
-                            public void onCancel() {
-                                // App code
-                                Toast.makeText(getApplication(), "fail", Toast.LENGTH_SHORT).show();
-                            }
-
-                            @Override
-                            public void onError(FacebookException exception) {
-                                // App code
-                                Toast.makeText(getApplication(), "error", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-            }
-        });
-
-        accessTokenTracker = new AccessTokenTracker() {
-            @Override
-            protected void onCurrentAccessTokenChanged(
-                    AccessToken oldAccessToken,
-                    AccessToken currentAccessToken) {
-
-                accessToken = currentAccessToken;
-                // App code
-            }
-        };
 
         //DIGITS
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
@@ -146,13 +86,6 @@ public class LoginActivity extends ActionBarActivity {
         });
 
         cadButton = (Button) findViewById(R.id.btn_cadastrar);
-
-        accessTokenTracker.startTracking();
-
-        if(accessTokenTracker.isTracking()){
-            Intent intent = new Intent(this, CadastroActivity.class);
-            startActivity(intent);
-        }
 
     }
 

@@ -6,7 +6,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="400dp"
-        android:layout_marginTop="50dp">
+        android:layout_marginTop="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -48,34 +48,59 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/cad_password"
-                android:id="@+id/cad_password"/>
+                android:id="@+id/cad_password"
+                android:inputType="textPassword" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/cad_pass_confirm"
-                android:id="@+id/cad_pass_confirm"/>
+                android:id="@+id/cad_pass_confirm"
+                android:inputType="textPassword" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/cad_phone"
-                android:id="@+id/cad_phone" />
+                android:id="@+id/cad_phone"
+                android:inputType="phone" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/cad_birthday"
+                android:inputType="datetime" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cad_state"/>
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/cad_states">
+
+            </Spinner>
 
             <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:layout_marginTop="5dp">
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/cad_male"/>
+                    android:layout_weight="0.5"
+                    android:text="@string/cad_male"
+                    android:layout_gravity="center"/>
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/cad_female"/>
+                    android:text="@string/cad_female"
+                    android:layout_weight="0.5"/>
 
             </RadioGroup>
 
@@ -87,6 +112,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="15dp"
         android:text="@string/cad_button"
         />
 
