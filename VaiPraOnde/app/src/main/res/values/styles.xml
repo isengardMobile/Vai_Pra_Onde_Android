@@ -2,7 +2,7 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="android:previewImage">@drawable/ic_launcher</item>
+        <item name="android:previewImage">@drawable/ic_launcher_ldpi</item>
         <item name="android:colorBackground">#1560BD</item>
         <item name="android:textColor">#E7FEFF</item>
     </style>

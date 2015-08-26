@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
@@ -31,6 +32,7 @@ import java.util.List;
 
 import isengardmobile.com.br.vaipraonde.api.StatesRepositoryApi;
 import isengardmobile.com.br.vaipraonde.impl.StasteRepositoryApiImpl;
+import isengardmobile.com.br.vaipraonde.impl.UserRepositoryImpl;
 import isengardmobile.com.br.vaipraonde.isengardmobile.com.vaipraonde.views.CircleImageView;
 import isengardmobile.com.br.vaipraonde.model.States;
 import isengardmobile.com.br.vaipraonde.model.User;
@@ -50,8 +52,10 @@ public class CadastroActivity extends Activity {
     private AccessTokenTracker accessTokenTracker;
     private CircleImageView cadPhoto;
     private Spinner states;
+    private Button cadButton;
 
     private StatesRepositoryApi statesRepository;
+    private UserRepositoryImpl userRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +63,8 @@ public class CadastroActivity extends Activity {
         setContentView(R.layout.activity_cadastro);
 
         name = (EditText) findViewById(R.id.cad_name);
+        lastName = (EditText) findViewById(R.id.cad_last_name);
+        pass = (EditText) findViewById(R.id.cad_password);
         email = (EditText) findViewById(R.id.cad_email);
         lastName = (EditText) findViewById(R.id.cad_last_name);
         cadPhoto = (CircleImageView) findViewById(R.id.cad_photo);
@@ -70,6 +76,27 @@ public class CadastroActivity extends Activity {
         ArrayAdapter<States> adapter = new ArrayAdapter<States>(this, android.R.layout.simple_spinner_item, statesRepository.findAll());
         states.setAdapter(adapter);
 
+        cadButton = (Button) findViewById(R.id.btn_cadastrar);
+
+    }
+
+//    private Boolean validaCadastro(User user){
+//        if(user.getName() == null || user.getBirthday() == null || user.getCell() == null || user.getEmail() == null){
+//            return Boolean.TRUE;
+//        }
+//        return Boolean.FALSE;
+//    }
+
+    public void cadastrar(View view){
+        User user = new User();
+
+
+
+        try {
+            userRepository.create(user);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
     
     @Override
