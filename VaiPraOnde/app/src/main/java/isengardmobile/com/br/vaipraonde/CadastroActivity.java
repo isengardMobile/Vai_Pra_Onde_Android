@@ -46,7 +46,6 @@ import isengardmobile.com.br.vaipraonde.model.User;
 
 public class CadastroActivity extends Activity {
 
-    private User user;
     private EditText name;
     private EditText lastName;
     private EditText email;
@@ -85,6 +84,7 @@ public class CadastroActivity extends Activity {
         cadMale = (RadioButton) findViewById(R.id.cad_sex_male);
 
         statesRepository = new StasteRepositoryApiImpl();
+        userRepository = new UserRepositoryImpl();
 
         ArrayAdapter<States> adapter = new ArrayAdapter<States>(this, android.R.layout.simple_spinner_item, statesRepository.findAll());
         states.setAdapter(adapter);
@@ -107,19 +107,22 @@ public class CadastroActivity extends Activity {
         States state = (States) states.getSelectedItem();
         RadioButton sex = (RadioButton) findViewById(cadSexGroup.getCheckedRadioButtonId());
 
-        User user = new User();
-
-        user.setName(name.getText().toString() != null ? name.getText().toString() : "");
-        user.setLastName(lastName.getText().toString() != null ? lastName.getText().toString() : "");
-        user.setCell(0l);
-        user.setCity(state.getDescricao());
-        user.setEmail(email.getText().toString() != null ? email.getText().toString() : "");
-        user.setSex(sex.getText().toString() !=  null ? sex.getText().toString() : "");
-        user.setPass(pass.getText().toString());
-
         try {
+            User user = new User();
+
+            user.setName(name.getText().toString() != null ? name.getText().toString() : "");
+            user.setLastName(lastName.getText().toString() != null ? lastName.getText().toString() : "");
+            user.setCell(0l);
+            user.setCity(state.getDescricao());
+            user.setEmail(email.getText().toString() != null ? email.getText().toString() : "");
+            user.setSex(sex.getText().toString() !=  null ? sex.getText().toString() : "");
+            user.setPass(pass.getText().toString());
+
             userRepository.create(user);
         } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        catch (Exception e){
             e.printStackTrace();
         }
     }
