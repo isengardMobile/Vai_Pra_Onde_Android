@@ -18,6 +18,9 @@ public class User implements Serializable {
     private String city;
     private String username;
 
+    public User() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -96,5 +99,21 @@ public class User implements Serializable {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", pass='" + pass + '\'' +
+                ", cell=" + cell +
+                ", email='" + email + '\'' +
+                ", sex='" + sex + '\'' +
+                ", birthday=" + birthday +
+                ", city='" + city + '\'' +
+                ", username='" + username + '\'' +
+                '}';
     }
 }

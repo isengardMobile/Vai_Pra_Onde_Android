@@ -69,7 +69,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/cad_birthday"
-                android:inputType="datetime" />
+                android:inputType="datetime"
+                android:id="@+id/cad_birthday"/>
+
+            <DatePicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cad_date_picker"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -87,20 +93,23 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_weight="1"
-                android:layout_marginTop="5dp">
+                android:layout_marginTop="5dp"
+                android:id="@+id/cad_sex_group">
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:text="@string/cad_male"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:id="@+id/cad_sex_male"/>
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/cad_female"
-                    android:layout_weight="0.5"/>
+                    android:layout_weight="0.5"
+                    android:id="@+id/cad_sex_female"/>
 
             </RadioGroup>
 
@@ -114,6 +123,6 @@
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
         android:text="@string/cad_button"
-        />
+        android:onClick="cadastrar"/>
 
 </LinearLayout>

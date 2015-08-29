@@ -3,11 +3,11 @@
     android:orientation="vertical" android:layout_width="fill_parent"
     android:layout_height="match_parent"
     android:layout_weight="1"
-    android:background="@color/red">
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:layout_weight="0.5"
         android:layout_gravity="fill"
         android:orientation="vertical">
@@ -15,9 +15,9 @@
         <isengardmobile.com.br.vaipraonde.isengardmobile.com.vaipraonde.views.CircleImageView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="50dp"
             android:layout_gravity="center"
-            android:src="@drawable/ic_launcher"/>
+            android:src="@drawable/ic_launcher_xxxhdpi"/>
 
 
     </LinearLayout>

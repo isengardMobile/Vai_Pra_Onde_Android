@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="action_friends" type="id">action_friends</item>
+    <item name="cad_sex_group" type="id">cad_sex_group</item>
 </resources>
